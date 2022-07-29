@@ -1,14 +1,14 @@
 import { Task } from "./Task";
 
-export const Tasks = (props) => {
+export const Tasks = ({ tasks, onDelete, onToggle }) => {
   return (
     <>
-      {props.tasks.map((task) => (
+      {tasks.map((task) => (
         <Task
           key={task.id}
           task={task}
-          onDelete={props.onDelete}
-          onToggle={props.onToggle}
+          onDelete={onDelete}
+          onToggle={onToggle}
         />
       ))}
     </>
