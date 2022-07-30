@@ -9,19 +9,24 @@ const App = () => {
 
   useEffect(
     () => {
-      // fetch API with async await
-      const fetchTasks = async () => {
-        // fetch returns a promise
-        const res = await fetch("http://localhost:5000/tasks");
-        const data = await res.json();
-        console.log(data);
+      const getTasks = async () => {
+        const tasksFromServer = await fetchTasks();
+        setTasks(tasksFromServer);
       };
       // call fetchTasks when page loads
-      fetchTasks();
+      getTasks();
     },
     // add dependency value here
     []
   );
+  // fetch tasks
+  // usingfetch API with async await
+  const fetchTasks = async () => {
+    // fetch returns a promise
+    const res = await fetch("http://localhost:5000/tasks");
+    const data = await res.json();
+    return data;
+  };
 
   // Add Task Function
   const addTask = (task) => {
