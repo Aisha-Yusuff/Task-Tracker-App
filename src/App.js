@@ -30,8 +30,20 @@ const App = () => {
   };
 
   // Add Task Function
-  const addTask = (task) => {
-    console.log(task);
+  const addTask = async (task) => {
+    // Post request
+    const res = await fetch("http://localhost:5000/tasks", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(task),
+    });
+
+    // data is now the new task that was just created
+    const data = await res.json();
+
+    setTasks([...tasks, data]);
   };
 
   // Delete Task Function
