@@ -1,30 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "./components/Header";
 import { Tasks } from "./components/Tasks";
 import { AddTask } from "./components/AddTask";
 
-function App() {
+const App = () => {
   const [showAddTask, setShowAddTask] = useState(false);
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      text: "Doctors Appointment",
-      day: "Aug 5th at 2:30pm",
-      reminder: true,
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(
+    () => {
+      // fetch API with async await
+      const fetchTasks = async () => {
+        // fetch returns a promise
+        const res = await fetch("http://localhost:5000/tasks");
+        const data = await res.json();
+        console.log(data);
+      };
+      // call fetchTasks when page loads
+      fetchTasks();
     },
-    {
-      id: 2,
-      text: "Dentist Appointment",
-      day: "Aug 7th at 1:30pm",
-      reminder: true,
-    },
-    {
-      id: 3,
-      text: "Food Shopping",
-      day: "Aug 8th at 5:30pm",
-      reminder: false,
-    },
-  ]);
+    // add dependency value here
+    []
+  );
 
   // Add Task Function
   const addTask = (task) => {
@@ -58,6 +55,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;
